@@ -1,0 +1,51 @@
+﻿@using Demo.WebClient.Extension
+@{
+    ViewBag.Title = "Course";
+}
+@section css {
+    <link rel="stylesheet" href="~/jqgrid/css/ui.jqgrid.css" />
+    <link rel="stylesheet" href="~/jqgrid/css/ui.jqgrid-bootstrap.css" />
+    <link rel="stylesheet" href="~/jqgrid/css/ui.jqgrid-bootstrap-ui.css" />
+}
+@if(User.HasClaim("right", RightConfig.ADD_COURSE)){ 
+    <p>
+
+        @Html.ActionLink("Create New", "Add", "Course")
+    </p>
+}
+<table id="course-table"></table>
+<div id="course-pager"></div>
+
+@section scripts {
+    <script src="~/jqgrid/js/i18n/grid.locale-en.js"></script>
+    <script src="~/jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script>
+            $("#course-table").jqGrid({
+                url: '@Url.Action("GetAll", "Course")',
+                shrinkToFit: true,
+                height: 'auto',
+                datatype: "json",
+                styleUI: "Bootstrap",
+                colNames: ['Id', 'Name', 'Student', 'Actions'],
+                colModel: [
+                    { name: 'id', index: 'Id'},
+                    { name: 'name', index: 'Name'},
+                    { name: 'student', index: 'Student' },
+                    { name: 'Actions', index: 'Actions', editable: true, sortable: false, formatter: displayButtons, align: 'right' }
+                ],
+                rowNum: 5,
+                rowList: [3, 5, 10, 20, 30],
+                pager: '#course-pager',
+                sortname: 'Id',
+                viewrecords: true,
+                sortorder: "desc",
+                caption: "Course List"
+            });
+            $("#course-table").jqGrid('navGrid', '#course-pager', { edit: false, add: false, del: false, search: true },{} ,{} ,{}, {closeAfterSearch:true});
+            function displayButtons(cellvalue, options, rowObject) {
+                var edit = "<a href='@Url.Action("Edit", "Course")/" + rowObject.id + "' class='btn btn-primary' style='display:  @(User.HasClaim("right", RightConfig.EDIT_COURSE) ? "inline-table" : "none")'>Edit</a>",
+                    del = "<a href='@Url.Action("Delete", "Course")/" + rowObject.id + "' class='btn btn-danger' style='display:  @(User.HasClaim("right", RightConfig.DELETE_COURSE) ? "inline-table" : "none")'>Delete</a>"
+                return edit + " " + del;
+            }
+    </script>
+}

@@ -1,0 +1,69 @@
+﻿* {
+    font-family: arial;
+    font-size: 14px;
+    line-height: 16px;
+    color: #10003c;
+}
+
+.fiddy {
+    width: 50%;
+    float: left;
+}
+
+    .fiddy textarea {
+        max-width:100%;
+        width: 90%;
+        height: 150px;
+        background: -webkit-linear-gradient(left top, #ffffd2, #fffff2); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(bottom right, #ffffd2, #fffff2); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(bottom right, #ffffd2, #fffff2); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to bottom right, #ffffd2,#fffff2); /* Standard syntax (must be last) */
+        border: 1px solid #999;
+    }
+
+textarea, input, select, option {
+    color: #000000;
+}
+
+.requesttime {
+    float: right;
+    margin-right: 5%;
+}
+
+.clear {
+    clear: both;
+}
+
+.button {
+    font-size: 24px;
+    color: #FFFCF0;
+    padding: 10px 20px;
+    background: #676693;
+    float: left;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+    .button span {
+        color: #005500;
+        font-size: 12px;
+    }
+
+h2 {
+    font-size: 1.4em;
+}
+
+.grad1 {
+    background: -webkit-linear-gradient(left top, #d3edc0, #f0fff0) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #d3edc0, #f0fff0) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #d3edc0, #f0fff0) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #d3edc0,#f0fff0) !important; /* Standard syntax (must be last) */
+}
+
+.Error {
+    background: -webkit-linear-gradient(left top, #FFDDDD, #FFEEEE) !important; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #FFDDDD, #FFEEEE) !important; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #FFDDDD, #FFEEEE) !important; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #FFDDDD,#FFEEEE) !important; /* Standard syntax (must be last) */
+}

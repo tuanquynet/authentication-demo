@@ -1,0 +1,20 @@
+﻿@using System.Security.Claims
+@using System.Collections.Generic;
+@model IEnumerable<Claim>
+@{
+    ViewData["Title"] = "About";
+}
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr>
+        <th>Claim Name</th>
+        <th>Claim Value</th>
+    </tr>
+    @foreach (Claim claim in Model)
+    {
+    <tr>
+        <td>@claim.Type</td>
+        <td>@claim.Value</td>
+    </tr>
+    }
+</table>
