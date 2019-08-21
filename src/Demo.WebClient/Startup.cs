@@ -48,33 +48,33 @@ namespace Demo.WebClient
             //    //options.Scope.Add("offline_access");
             //});
 
-            //// Authorization code
-            //.AddOpenIdConnect("oidc", options =>
-            //{
-            //    options.SignInScheme = "Cookies";
-            //    options.Authority = "https://localhost:5000";
-            //    options.RequireHttpsMetadata = true;
-            //    options.ClientId = "w2";
-            //    options.ClientSecret = "123456";
-            //    options.SaveTokens = true;
-            //    options.ResponseType = "code";
-            //    options.Scope.Add("course-api");
-            //    options.Scope.Add("offline_access");
-            //});
+            // Authorization code
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = "https://localhost:5000";
+                options.RequireHttpsMetadata = false;
+                options.ClientId = "w2";
+                options.ClientSecret = "123456";
+                options.SaveTokens = true;
+                options.ResponseType = "code";
+                options.Scope.Add("course-api");
+                options.Scope.Add("offline_access");
+            });
 
             // hybrid
-            .AddOpenIdConnect("oidc", options =>
-             {
-                 options.SignInScheme = "Cookies";
-                 options.Authority = "https://localhost:5000";
-                 options.RequireHttpsMetadata = true;
-                 options.ClientId = "w3";
-                 options.ClientSecret = "123456";
-                 options.SaveTokens = true;
-                 options.ResponseType = "code id_token";
-                 options.Scope.Add("course-api");
-                 options.Scope.Add("offline_access");
-             });
+            // .AddOpenIdConnect("oidc", options =>
+            //  {
+            //      options.SignInScheme = "Cookies";
+            //      options.Authority = "http://localhost:5000";
+            //      options.RequireHttpsMetadata = true;
+            //      options.ClientId = "w3";
+            //      options.ClientSecret = "123456";
+            //      options.SaveTokens = true;
+            //      options.ResponseType = "code id_token";
+            //      options.Scope.Add("course-api");
+            //      options.Scope.Add("offline_access");
+            //  });
 
 
             //.AddCookie("AzureAD")

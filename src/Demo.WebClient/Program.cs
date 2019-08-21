@@ -16,6 +16,7 @@ namespace Demo.WebClient
     {
         public static void Main(string[] args)
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             BuildWebHost(args).Run();
         }
 
