@@ -24,6 +24,33 @@ namespace Demo.IdentityServer
             {
                 new Client
                 {
+                    ClientId = "w2",
+                    ClientName = "MVC Web Application - Authorization Code",
+                    ClientSecrets =
+                    {
+                        new Secret("123456".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    EnableLocalLogin = false,
+                    // where to redirect to after login
+                    RedirectUris = { "https://localhost:10001/signin-oidc" },
+
+                    PostLogoutRedirectUris  = { "https://localhost:10001/signout-callback-oidc" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        // allow access to course-api
+                        "course-api",
+                        StandardScopes.OfflineAccess
+                    },
+                     AllowOfflineAccess = true,
+                     AlwaysIncludeUserClaimsInIdToken = true,
+                     IdentityProviderRestrictions = new string[]{"aad"},
+                },
+                new Client
+                {
                     ClientId = "u1",
 
                     // no interactive user, use the clientid/secret for authentication
@@ -36,13 +63,14 @@ namespace Demo.IdentityServer
                     },
 
                     // scopes that client has access to
-                    AllowedScopes = { "course-api" },
+                    AllowedScopes = { "course-api",IdentityServerConstants.StandardScopes.OpenId, StandardScopes.OfflineAccess },
                     Claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Role, "Admin"),
                         new Claim(JwtClaimTypes.Role, "Admin")
                     },
-                    ClientClaimsPrefix = ""
+                    ClientClaimsPrefix = "",
+                    AllowOfflineAccess = true
                 },
                 new Client
                 {
@@ -84,7 +112,7 @@ namespace Demo.IdentityServer
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     SlidingRefreshTokenLifetime = 3600
                 },
-                 new Client
+                new Client
                 {
                     ClientId = "w1",
                     ClientName = "MVC Web Application - Implicit",
@@ -104,39 +132,14 @@ namespace Demo.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         // allow access to course-api
                         "course-api",
-                       // StandardScopes.OfflineAccess
+                        StandardScopes.OfflineAccess
                     },
                     // allow transfer access token via browser
                     AllowAccessTokensViaBrowser = true,
                     AlwaysSendClientClaims = true,
-                    AlwaysIncludeUserClaimsInIdToken = true
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    AllowOfflineAccess = true
                 },
-                new Client
-                {
-                    ClientId = "w2",
-                    ClientName = "MVC Web Application - Authorization Code",
-                    ClientSecrets =
-                    {
-                        new Secret("123456".Sha256())
-                    },
-                    AllowedGrantTypes = GrantTypes.Code,
-                    // where to redirect to after login
-                    RedirectUris = { "https://localhost:10001/signin-oidc" },
-
-                    PostLogoutRedirectUris  = { "https://localhost:10001/signout-callback-oidc" },
-
-                    AllowedScopes = new List<string>
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        // allow access to course-api
-                        "course-api",
-                       // StandardScopes.OfflineAccess
-                    },
-                     AllowOfflineAccess = true,
-                     AlwaysIncludeUserClaimsInIdToken = true
-                },
-                
                  // hybrid
                  new Client
                 {

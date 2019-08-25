@@ -31,7 +31,7 @@ namespace Demo.CourseApi
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "MOAP API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Course API", Version = "v1" });
                 var section = Configuration.GetSection("Identity:Swagger");
                 var oauthScheme = new OAuth2Scheme();
                 oauthScheme.AuthorizationUrl = $"{section["Authority"]}/connect/authorize";
@@ -44,7 +44,7 @@ namespace Demo.CourseApi
             });
             services.AddAuthorization(options =>
             {
-                var section = Configuration.GetSection("Authorization");
+                var section = Configuration.GetSection("Identity:Authorization");
                 Dictionary<string, string[]> policies = new Dictionary<string, string[]>();
                 section.Bind(policies);
                 foreach (var policy in policies)
@@ -71,11 +71,11 @@ namespace Demo.CourseApi
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MOAP v1 api");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Course v1 api");
                 var section = Configuration.GetSection("Identity:Swagger");
                 c.ConfigureOAuth2(section["ClientId"], section["ClientSecret"], "course-api", "Swagger");
             });
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
