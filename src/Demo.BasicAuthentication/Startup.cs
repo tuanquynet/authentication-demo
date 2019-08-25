@@ -28,7 +28,7 @@ namespace Demo.BasicAuthentication
         {
             services.AddControllers(options =>
             {
-                // options.Filters.Add(typeof(AuthenticationValidation));
+                 options.Filters.Add(typeof(AuthenticationValidation));
             });
         }
 
