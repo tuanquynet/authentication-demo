@@ -26,7 +26,7 @@ namespace Demo.CourseApi.Controllers
             return courses[id];
         }
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Policy = "ManageUser")]
         public IActionResult AddCourse([FromBody]CourseModel course)
         {
             var max = courses.Keys.Max();
