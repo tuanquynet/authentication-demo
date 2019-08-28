@@ -31,7 +31,7 @@ namespace Demo.IdentityServer
                         new Secret("123456".Sha256())
                     },
                     AllowedGrantTypes = GrantTypes.Code,
-                    EnableLocalLogin = false,
+                    EnableLocalLogin = true,
                     // where to redirect to after login
                     RedirectUris = { "https://localhost:10001/signin-oidc" },
 
@@ -47,7 +47,7 @@ namespace Demo.IdentityServer
                     },
                      AllowOfflineAccess = true,
                      AlwaysIncludeUserClaimsInIdToken = true,
-                     IdentityProviderRestrictions = new string[]{"aad"},
+                     //IdentityProviderRestrictions = new string[]{"aad"},
                 },
                 new Client
                 {
@@ -125,8 +125,8 @@ namespace Demo.IdentityServer
                     RedirectUris = { "https://localhost:10000/signin-oidc" },
 
                     PostLogoutRedirectUris  = { "https://localhost:10000/signout-callback-oidc" },
-
-                    AllowedScopes = new List<string>
+                        //RequireClientSecret = false,
+            AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,

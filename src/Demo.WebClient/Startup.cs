@@ -52,8 +52,8 @@ namespace Demo.WebClient
                 options.ClientSecret = "123456";
                 options.SaveTokens = true;
                 options.ResponseType = "code";
-                options.Scope.Add("course-api");
-                options.Scope.Add("offline_access");
+                //options.Scope.Add("course-api");  
+                //options.Scope.Add("offline_access");
             });
 
             // hybrid
