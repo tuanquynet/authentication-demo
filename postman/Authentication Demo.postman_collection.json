@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "f45aa63c-be2c-431d-924e-85c10c80bad4",
+		"name": "Authentication Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1 - Client Credentials",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "u1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "course-api",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://localhost:5000/connect/token"
+			},
+			"response": []
+		},
+		{
+			"name": "2 - Resource Owner Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "u2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "thanh@demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "course-api",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://localhost:5000/connect/token"
+			},
+			"response": []
+		},
+		{
+			"name": "3 - Resource Owner Password - Offline Access",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "u2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "thanh@demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "course-api offline_access",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://localhost:5000/connect/token"
+			},
+			"response": []
+		},
+		{
+			"name": "4 - Get Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "ae3a4043a5d84a16062a78e4ca0b37bf8dfcda1518e9ce81ea7da6e8cfac806e",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "u2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://localhost:5000/connect/token"
+			},
+			"response": []
+		}
+	]
+}
