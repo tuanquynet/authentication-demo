@@ -3,7 +3,6 @@ using Demo.IdentityServer.Service;
 using Demo.IdentityServer.Services;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,8 +21,9 @@ namespace Demo.IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddControllersWithViews();
             services.AddSingleton<IUserRepository, UserRepository>();
+
             // Identity server
             services.AddIdentityServer()
                 // add credentials
@@ -31,7 +31,7 @@ namespace Demo.IdentityServer
 
                 // api resource
                 .AddInMemoryApiResources(Config.GetApiResources())
-                
+
                 // users
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
 
@@ -69,17 +69,18 @@ namespace Demo.IdentityServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
             app.UseStaticFiles();
-
+            app.UseAuthorization();
             app.UseIdentityServer();
-
-            app.UseMvcWithDefaultRoute();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+           {
+               endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
+           });
         }
     }
 }

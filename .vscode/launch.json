@@ -10,9 +10,53 @@
             "request": "launch",
             "preLaunchTask": "identity-build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Demo.IdentityServer/bin/Debug/netcoreapp2.2/Demo.IdentityServer.dll",
+            "program": "${workspaceFolder}/src/Demo.IdentityServer/bin/Debug/netcoreapp3.0/Demo.IdentityServer.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Demo.IdentityServer",
+            "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "WebClient",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "web-build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/Demo.WebClient/bin/Debug/netcoreapp3.0/Demo.WebClient.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Demo.WebClient",
+            "stopAtEntry": false,
+            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "CourseApi",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "course-build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/Demo.CourseApi/bin/Debug/netcoreapp3.0/Demo.CourseApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Demo.WebClient",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

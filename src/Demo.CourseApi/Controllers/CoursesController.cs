@@ -6,9 +6,10 @@ using System.Linq;
 
 namespace Demo.CourseApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class CoursesController : Controller
+    public class CoursesController : ControllerBase
     {
         static Dictionary<int, CourseModel> courses = new Dictionary<int, CourseModel>() {
             {1,  new  CourseModel(){ Id = 1, Name = "C# Programing for Beginers", Student = 10} },

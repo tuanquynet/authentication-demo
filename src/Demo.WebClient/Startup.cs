@@ -18,8 +18,8 @@ namespace Demo.WebClient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddControllersWithViews();
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             //services.AddAuthorization(options => {
             //    options.AddPolicy("ManagementPolicy", p => p.RequireRole(new string[] { "Admin", "Manager" }));
             //});
@@ -114,24 +114,16 @@ namespace Demo.WebClient
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseAuthentication();
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
