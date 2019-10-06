@@ -31,7 +31,7 @@ namespace Demo.IdentityServer
                         new Secret("123456".Sha256())
                     },
                     AllowedGrantTypes = GrantTypes.Code,
-                    EnableLocalLogin = true,
+                    EnableLocalLogin = false,
                     // where to redirect to after login
                     RedirectUris = { "https://localhost:10001/signin-oidc" },
 
@@ -46,8 +46,9 @@ namespace Demo.IdentityServer
                         StandardScopes.OfflineAccess
                     },
                      AllowOfflineAccess = true,
+
                      AlwaysIncludeUserClaimsInIdToken = true,
-                     //IdentityProviderRestrictions = new string[]{"aad"},
+                     IdentityProviderRestrictions = new string[]{"aad"},
                 },
                 new Client
                 {

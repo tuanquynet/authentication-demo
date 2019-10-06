@@ -1,18 +1,21 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Authentication and Authorization play a important role in the enterprise application. This repository show the demostration how to use the IdentityServer4 with asp.net core 3.0
+The technology using in this repo:
+1. [ASP.NET core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+2. [IdentityServer4](http://docs.identityserver.io/en/latest/)
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+The architecture
+
+![Architecture](/images/demo.png "Architecture")
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+```sh
+docker compose docker-compose.yml up
+```
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+In case you want to contribute, please send me a pull request.
 
 If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
 - [ASP.NET Core](https://github.com/aspnet/Home)
