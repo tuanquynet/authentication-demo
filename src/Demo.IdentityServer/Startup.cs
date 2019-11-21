@@ -77,9 +77,10 @@ namespace Demo.IdentityServer
                 option.AllowAnyOrigin();
                 option.AllowAnyHeader();
             });
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseIdentityServer();
-            app.UseRouting();
             app.UseEndpoints(endpoints =>
            {
                endpoints.MapControllerRoute(
