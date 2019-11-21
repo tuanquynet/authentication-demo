@@ -24,36 +24,55 @@ namespace Demo.IdentityServer
             {
                 new Client
                 {
-                    ClientId = "w2",
-                    ClientName = "MVC Web Application - Authorization Code",
-                    ClientSecrets =
-                    {
-                        new Secret("123456".Sha256())
-                    },
-                    AllowedGrantTypes = GrantTypes.Code,
-                    EnableLocalLogin = false,
+                    ClientId = "implicit-flow",
+                    ClientName = "Implicit flow client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
                     // where to redirect to after login
-                    RedirectUris = { "https://localhost:10001/signin-oidc" },
-
-                    PostLogoutRedirectUris  = { "https://localhost:10001/signout-callback-oidc" },
-
+                    RedirectUris = {
+                        "https://localhost:10000/callback",
+                        "https://localhost:10000/silent_renew.html",
+                        "http://localhost:10000/callback",
+                        "http://localhost:10000/silent_renew.html"
+                     },
+                    PostLogoutRedirectUris = {
+                     "http://localhost:10000",
+                     "https://localhost:10000"
+                    },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         // allow access to course-api
-                        "course-api",
-                        StandardScopes.OfflineAccess
+                        "course-api"
                     },
-                     AllowOfflineAccess = true,
-
-                     AlwaysIncludeUserClaimsInIdToken = true,
-                     IdentityProviderRestrictions = new string[]{"aad"},
+                    // allow transfer access token via browser
+                    AllowAccessTokensViaBrowser = true,
+                    AlwaysSendClientClaims = true,
+                    AlwaysIncludeUserClaimsInIdToken = true
                 },
                 new Client
                 {
-                    ClientId = "u1",
-
+                    ClientId = "authorization-code-flow",
+                    ClientName = "Authorization Code",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    EnableLocalLogin = true,
+                    // where to redirect to after login
+                    RedirectUris = { "https://localhost:10001/signin-oidc" },
+                    PostLogoutRedirectUris  = { "https://localhost:10001/signout-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        // allow access to course-api
+                        "course-api"
+                    },
+                     AlwaysIncludeUserClaimsInIdToken = true,
+                    //  IdentityProviderRestrictions = new string[]{"aad"},
+                },
+                new Client
+                {
+                    ClientId = "client-credential",
+                    Description = "Client credential flow",
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
 
@@ -64,34 +83,23 @@ namespace Demo.IdentityServer
                     },
 
                     // scopes that client has access to
-                    AllowedScopes = { "course-api",IdentityServerConstants.StandardScopes.OpenId, StandardScopes.OfflineAccess },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        // allow access to course-api
+                        "course-api"
+                    },
                     Claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Role, "Admin"),
                         new Claim(JwtClaimTypes.Role, "Admin")
                     },
-                    ClientClaimsPrefix = "",
-                    AllowOfflineAccess = true
+                    ClientClaimsPrefix = ""
                 },
                 new Client
                 {
-                    ClientId = "o1",
-
-                    // no interactive user, use the clientid/secret for authentication
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    // secret for authentication
-                    ClientSecrets =
-                    {
-                        new Secret("123456".Sha256())
-                    },
-
-                    // scopes that client has access to
-                    AllowedScopes = { "order-api" }
-                },
-                new Client
-                {
-                    ClientId = "u2",
+                    ClientId = "resource-owner-password",
 
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
@@ -104,48 +112,58 @@ namespace Demo.IdentityServer
 
                     // scopes that client has access to
                     AllowedScopes = {
-                        "course-api",
-                        StandardScopes.OfflineAccess
-                    },
-                     // Offline access
-                    AllowOfflineAccess = true,
-                    AccessTokenLifetime = 300,
-                    RefreshTokenExpiration = TokenExpiration.Sliding,
-                    SlidingRefreshTokenLifetime = 3600
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 },
                 new Client
                 {
-                    ClientId = "w1",
-                    ClientName = "MVC Web Application - Implicit",
+                    ClientId = "pkce",
                     ClientSecrets =
                     {
                         new Secret("123456".Sha256())
                     },
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    // where to redirect to after login
-                    RedirectUris = { "https://localhost:10000/signin-oidc" },
-
-                    PostLogoutRedirectUris  = { "https://localhost:10000/signout-callback-oidc" },
-                        //RequireClientSecret = false,
-            AllowedScopes = new List<string>
-                    {
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = {
+                        "https://localhost:10000/callback",
+                        "https://localhost:10000/silent_renew.html",
+                        "http://localhost:10000/callback",
+                        "http://localhost:10000/silent_renew.html"
+                     },
+                    PostLogoutRedirectUris = {
+                     "http://localhost:10000",
+                     "https://localhost:10000"
+                    },
+                    // scopes that client has access to
+                    AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        // allow access to course-api
-                        "course-api",
-                        StandardScopes.OfflineAccess
+                        "course-api"
                     },
-                    // allow transfer access token via browser
-                    AllowAccessTokensViaBrowser = true,
-                    AlwaysSendClientClaims = true,
-                    AlwaysIncludeUserClaimsInIdToken = true,
-                    AllowOfflineAccess = true
+                    RequirePkce = true
+                },
+                new Client
+                {
+                    ClientId = "device-flow",
+                    ClientSecrets =
+                    {
+                        new Secret("123456".Sha256())
+                    },
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.DeviceFlow,
+                    // scopes that client has access to
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "course-api"
+                    }
                 },
                  // hybrid
                  new Client
                 {
-                    ClientId = "w3",
-                    ClientName = "MVC Web Application - Hybrid flow",
+                    ClientId = "hybrid",
+                    ClientName = "Hybrid flow",
                     ClientSecrets =
                     {
                         new Secret("123456".Sha256())

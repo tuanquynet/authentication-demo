@@ -8,6 +8,7 @@ namespace IdentityServer4.Quickstart.UI
     {
         public bool IsRedirect => RedirectUri != null;
         public string RedirectUri { get; set; }
+        public string ClientId { get; set; }
 
         public bool ShowView => ViewModel != null;
         public ConsentViewModel ViewModel { get; set; }

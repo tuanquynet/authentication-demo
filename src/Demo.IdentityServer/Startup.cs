@@ -72,6 +72,11 @@ namespace Demo.IdentityServer
         public void Configure(IApplicationBuilder app)
         {
             app.UseStaticFiles();
+            app.UseCors(option =>
+            {
+                option.AllowAnyOrigin();
+                option.AllowAnyHeader();
+            });
             app.UseAuthorization();
             app.UseIdentityServer();
             app.UseRouting();
