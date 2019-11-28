@@ -29,6 +29,7 @@ namespace Demo.WebClient
                 options.DefaultChallengeScheme = "oidc";
             })
                 .AddCookie("Cookies")
+
             // //Implicit flow
             // .AddOpenIdConnect("oidc", options =>
             // {
@@ -48,7 +49,7 @@ namespace Demo.WebClient
                 options.SignInScheme = "Cookies";
                 options.Authority = "https://localhost:5000";
                 options.RequireHttpsMetadata = true;
-                options.ClientId = "w2";
+                options.ClientId = "authorization-code-flow";
                 options.ClientSecret = "123456";
                 options.SaveTokens = true;
                 options.ResponseType = "code";
@@ -119,6 +120,7 @@ namespace Demo.WebClient
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

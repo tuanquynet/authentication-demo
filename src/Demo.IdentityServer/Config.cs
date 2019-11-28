@@ -56,9 +56,11 @@ namespace Demo.IdentityServer
                     ClientName = "Authorization Code",
                     AllowedGrantTypes = GrantTypes.Code,
                     EnableLocalLogin = true,
+                    RequireClientSecret = false,
+                    RequirePkce = true,
                     // where to redirect to after login
-                    RedirectUris = { "https://localhost:10001/signin-oidc" },
-                    PostLogoutRedirectUris  = { "https://localhost:10001/signout-callback-oidc" },
+                    RedirectUris = { "https://localhost:10000/signin-oidc" },
+                    PostLogoutRedirectUris  = { "https://localhost:10000/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
